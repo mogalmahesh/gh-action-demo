@@ -1,0 +1,10 @@
+name: Test Action
+on: workflow_dispatch
+jobs:
+  first-job:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Fisrt step
+        run: echo "Hello world, first step"
+      - name: Last step
+        run: echo "Last step"
