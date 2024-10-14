@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "test:app1": "jest -- app1/test.js",
+    "test:app1": "jest --coverage -- app1/test.js",
     "test:app2": "jest -- app2/test.js"
   },
   "keywords": [],

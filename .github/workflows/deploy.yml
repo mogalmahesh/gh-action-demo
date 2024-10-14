@@ -1,5 +1,7 @@
 name: Deploy code
-on: workflow_dispatch
+on:
+  - push # run workflow on push
+  - workflow_dispatch # run workflow manually
 jobs:
   test:
     runs-on: ubuntu-22.04
@@ -10,9 +12,36 @@ jobs:
         run: yarn install
       - name: Run test
         run: yarn test
+  test-app1:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install node dependencies
+        run: yarn install
+      - name: Run test
+        run: yarn test:app1
+      - name: Test coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-dir
+          path: coverage
+  upload-coverage-report:
+    needs:
+      - test-app1
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Downalod artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-dir
+      - name: list coverage dir
+        run: ls -ltr
+      - name: upload coverage dir to GCP
+        run: echo "Uploading files to gcp"
   deploy:
     needs:
-      - test
+      - test-app1
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
