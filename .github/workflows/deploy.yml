@@ -10,3 +10,16 @@ jobs:
         run: yarn install
       - name: Run test
         run: yarn test
+  deploy:
+    needs:
+      - test
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install node dependencies
+        run: yarn install
+      - name: Build app
+        run: echo "Building app"
+      - name: Deploy code
+        run: echo "deploying to gcp"
