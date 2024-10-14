@@ -1,0 +1,12 @@
+name: Deploy code
+on: workflow_dispatch
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install node dependencies
+        run: yarn install
+      - name: Run test
+        run: yarn test
