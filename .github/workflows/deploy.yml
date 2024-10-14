@@ -8,6 +8,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
       - name: Cache node_modules
         uses: actions/cache@v4
         with:
