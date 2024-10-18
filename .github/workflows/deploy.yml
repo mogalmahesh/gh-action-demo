@@ -37,7 +37,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: check node version
+      - name: check version
         run: |
           node --version
           yarn --version
@@ -46,6 +46,12 @@ jobs:
           docker version
           docker compose version
           mvn --version
+      - name: steup terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.9.7"
+      - name: check terrafrom version
+        run: terraform --version
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "cache_dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
