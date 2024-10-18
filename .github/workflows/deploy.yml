@@ -4,7 +4,7 @@ on:
   - workflow_dispatch # run workflow manually
 jobs:
   test:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -31,7 +31,7 @@ jobs:
       - name: Run test
         run: yarn test
   test-app1:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     outputs:
       cacheDirPath: ${{ steps.yarn-cache-dir-path.outputs.cache_dir }}
     steps:
@@ -63,7 +63,7 @@ jobs:
   upload-coverage-report:
     needs:
       - test-app1
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Downalod artifacts
         uses: actions/download-artifact@v4
@@ -76,7 +76,7 @@ jobs:
   deploy:
     needs:
       - test-app1
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
